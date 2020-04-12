@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Task</title>
+</head>
+
+<body>
+    <div id="app">
+        <main class="container mt-4">
+            <h1 class="text-center">Tasks</h1>
+
+            <br>
+
+            <section class="row">
+                <div class="input-group col-6">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">New task</span>
+                    </div>
+                    <textarea class="form-control" v-model="name" @keyup.enter="addTask"></textarea>
+                </div>
+                <div class="col-2 d-flex align-items-center">
+                    <button class="btn btn-primary btn-block" @click="addTask">Send</button>
+                </div>
+            </section>
+
+            <br>
+            <br>
+
+
+            <h3>Faltantes</h3>
+            <section v-for="(item, index) of tasks" v-if="!item.status">
+                <article class="alert alert-info d-flex justify-content-between align-items-center">
+                    <div class="input-group col-6" v-if="item.edit">
+                        <textarea class="form-control" name="name" v-model="item.name" @keyup.enter="updateTask(index)">
+                            {{ item.name }}
+                        </textarea>
+                    </div>
+                    <div class="col-6" v-else>
+                        <span>{{ item.name }}</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-success" @click="changeStatus(index)">Ok</button>
+
+                        <button class="btn btn-primary" @click="updateTask(index)" v-show="item.edit">Update</button>
+                        <button class="btn btn-warning" @click="editTask(index)" v-show="!item.edit">Edit</button>
+
+                        <button class="btn btn-danger" @click="deleteTask(index)">X</button>
+                    </div>
+                </article>
+            </section>
+
+            <br>
+
+            <h3>Realizadas</h3>
+            <section v-for="(item, index) of tasks" v-if="item.status">
+                <article class="alert alert-success d-flex justify-content-between align-items-center">
+                    <div class="input-group col-6" v-if="item.edit">
+                        <textarea class="form-control" name="name" v-model="item.name" @keyup.enter="updateTask(index)"
+                            name="name">
+                            {{ item.name }}
+                        </textarea>
+                    </div>
+                    <span v-else>{{ item.name }}</span>
+                    <div>
+                        <button class="btn btn-primary" @click="updateTask(index)" v-show="item.edit">Update</button>
+                        <button class="btn btn-warning" @click="editTask(index)" v-show="!item.edit">Edit</button>
+
+                        <button class="btn btn-danger" @click="deleteTask(index)">X</button>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
