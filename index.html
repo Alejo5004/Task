@@ -17,13 +17,13 @@
             <br>
 
             <section class="row">
-                <div class="input-group col-6">
+                <div class="input-group col-sm-6">
                     <div class="input-group-prepend">
                         <span class="input-group-text">New task</span>
                     </div>
                     <textarea class="form-control" v-model="name" @keyup.enter="addTask"></textarea>
                 </div>
-                <div class="col-2 d-flex align-items-center">
+                <div class="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
                     <button class="btn btn-primary btn-block" @click="addTask">Send</button>
                 </div>
             </section>
@@ -40,7 +40,7 @@
                             {{ item.name }}
                         </textarea>
                     </div>
-                    <div class="col-6" v-else>
+                    <div class="col-sm-6" v-else>
                         <span>{{ item.name }}</span>
                     </div>
                     <div>
